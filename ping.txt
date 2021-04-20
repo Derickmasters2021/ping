@@ -1,0 +1,21 @@
+#!/bin/bash
+tab[0]=127.0.0.1
+tab[1]=192.168.1.18
+tab[2]=192.168.1.1
+tab[3]=194.2.0.20
+i=1
+while (( $i < ${#tab[*]} )); do
+ping -c 4 ${tab[$i]} -q
+tabR[$i]=${?};
+i=$((i+1));
+done
+
+clear
+i=1
+while (( $i < ${#tab[*]} )); do
+if [ ${tabR[$i]} -eq 0 ];
+then echo " ${tab[$i]} répond correctement au ping. "
+else echo " ${tab[$i]} ne répond pas, l'erreur peut venir de cette étape."
+fi
+i=$((i+1));
+done
